@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pavel-Andrei Gemalescu · IT Operations &amp; Automation Engineer</title>
+<meta name="description" content="Case files from a decade of IT operations: identity, endpoints, service delivery, and the automation and AI holding it all together.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --paper: #EFF1EC;
+  --paper-raised: #F8F9F6;
+  --ink: #1A2230;
+  --ink-soft: #52596B;
+  --ink-faint: #868C7E;
+  --line: #C7CEC2;
+  --line-strong: #AEB6A7;
+  --accent: #C9801F;
+  --accent-ink: #7A4A14;
+  --cat-system: #3A5A78;
+  --cat-auto: #2E7A6B;
+  --cat-ai: #5B4A8F;
+  --cat-ops: #9C4B3F;
+  --radius-sm: 3px;
+  --serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%}
+a{color:var(--accent-ink);text-decoration-thickness:1px}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid var(--accent-ink);outline-offset:3px;
+}
+.skip{
+  position:absolute;left:-999px;top:auto;
+  background:var(--ink);color:var(--paper);padding:.6em 1em;
+}
+.skip:focus{left:1em;top:1em;z-index:999}
+.wrap{max-width:1040px;margin:0 auto;padding:0 28px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1;margin:0}
+p{margin:0}
+
+/* ---------- header ---------- */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(239,241,236,.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.site-header .wrap{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 28px;gap:24px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.brand-mark{color:var(--cat-system);flex:none}
+.brand-name{font-family:var(--serif);font-weight:600;font-size:1.02rem;line-height:1.25}
+.brand-name small{display:block;font-family:var(--sans);font-weight:400;
+  font-size:.72rem;color:var(--ink-soft);letter-spacing:.01em}
+.top-nav{display:flex;gap:22px;flex-wrap:wrap}
+.top-nav a{color:var(--ink-soft);text-decoration:none;font-size:.92rem}
+.top-nav a:hover{color:var(--accent-ink)}
+
+/* ---------- hero ---------- */
+.hero{padding:76px 0 46px}
+.byline{
+  font-size:.92rem;color:var(--ink-soft);margin:0 0 18px;
+  display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+}
+.byline .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
+.hero h1{
+  font-size:2.6rem;
+  font-size:clamp(2.1rem,4.4vw,3.4rem);
+  max-width:15ch;letter-spacing:-.01em;
+}
+.hero .lede{
+  margin-top:22px;max-width:56ch;font-size:1.12rem;color:var(--ink-soft);
+}
+.hero .lede strong{color:var(--ink);font-weight:600}
+.chip-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.chip{
+  font-size:.82rem;padding:6px 12px;border:1px solid var(--line-strong);
+  border-radius:999px;color:var(--ink-soft);background:var(--paper-raised);
+}
+.hero-cta{margin-top:34px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--ink);color:var(--paper);
+  padding:11px 20px;border-radius:var(--radius-sm);
+  text-decoration:none;font-size:.95rem;font-weight:500;
+  border:1px solid var(--ink);
+}
+.btn:hover{background:var(--accent-ink);border-color:var(--accent-ink)}
+.stat-row{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--line);margin-top:48px;
+  border:1px solid var(--line);
+}
+.stat{background:var(--paper-raised);padding:20px 22px}
+.stat .n{font-family:var(--serif);font-size:1.9rem;color:var(--ink)}
+.stat .l{font-size:.84rem;color:var(--ink-soft);margin-top:4px}
+
+/* ---------- now panel ---------- */
+.now{padding:30px 0 56px;border-bottom:1px solid var(--line)}
+.now-box{
+  border:1px solid var(--line);background:var(--paper-raised);
+  padding:26px 28px;border-radius:var(--radius-sm);
+}
+.now-box h2{font-size:1.1rem;margin-bottom:14px}
+.now-box dl{margin:0;display:grid;gap:10px}
+.now-box dt{font-family:var(--mono);font-size:.74rem;color:var(--ink-faint);
+  text-transform:none;margin-bottom:2px}
+.now-box dd{margin:0;color:var(--ink-soft);font-size:.96rem}
+
+/* ---------- run-log index ---------- */
+.index{padding:64px 0 30px}
+.index h2{font-size:1.5rem;margin-bottom:8px}
+.index .sub{color:var(--ink-soft);max-width:54ch;margin-bottom:34px}
+.runlog{border-top:1px solid var(--line)}
+.run-row{
+  display:flex;align-items:stretch;gap:0;text-decoration:none;color:inherit;
+  border-bottom:1px solid var(--line);
+}
+.run-row .bar{width:4px;flex:none}
+.run-row .body{
+  flex:1;display:flex;gap:22px;align-items:baseline;flex-wrap:wrap;
+  padding:20px 16px;transition:background .15s ease;
+}
+.run-row:hover .body{background:var(--paper-raised)}
+.run-row .code{
+  font-family:var(--mono);font-size:.82rem;color:var(--ink-faint);flex:none;
+  width:64px;
+}
+.run-row .main{flex:1 1 320px;min-width:0}
+.run-row .main h3{font-family:var(--sans);font-weight:600;font-size:1.05rem}
+.run-row .main p{color:var(--ink-soft);margin-top:4px;font-size:.95rem;max-width:62ch}
+.run-row .tags{display:flex;gap:8px;flex-wrap:wrap;flex:none;max-width:220px}
+.run-row .tag{font-size:.72rem;color:var(--ink-faint);
+  border:1px solid var(--line-strong);padding:3px 8px;border-radius:999px}
+.run-row .go{flex:none;color:var(--ink-faint);align-self:center;font-size:1.1rem}
+
+/* ---------- case studies ---------- */
+.case{padding:68px 0;border-bottom:1px solid var(--line)}
+.case:nth-of-type(odd){background:var(--paper-raised)}
+.case-head{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;margin-bottom:8px}
+.cat-dot{width:11px;height:11px;border-radius:50%;flex:none;margin-top:9px}
+.case-eyebrow{font-family:var(--mono);font-size:.78rem;color:var(--ink-faint)}
+.case h2{font-size:1.7rem;margin-top:4px;max-width:34ch}
+.case-meta{color:var(--ink-soft);font-size:.92rem;margin:10px 0 36px}
+.case-grid{display:grid;grid-template-columns:1fr;gap:0}
+.case .block{padding:22px 0;border-top:1px solid var(--line)}
+.case .block:first-child{border-top:none;padding-top:0}
+.case .block h3{font-size:1rem;font-weight:600;font-family:var(--sans);
+  color:var(--ink);margin-bottom:10px}
+.case .block p{max-width:70ch;color:var(--ink-soft)}
+.case .block p + p{margin-top:12px}
+.boundaries{color:var(--ink-soft)}
+.boundaries strong{color:var(--ink)}
+
+/* flow diagram — vertical stepper with connecting line */
+.flow{margin:8px 0 10px;max-width:520px}
+.flow .step{
+  display:grid;grid-template-columns:22px 1fr;gap:12px;
+  position:relative;padding-bottom:16px;
+}
+.flow .step:last-child{padding-bottom:0}
+.flow .step::before{
+  content:"";position:absolute;left:10px;top:23px;bottom:-4px;
+  width:1px;background:var(--line-strong);
+}
+.flow .step:last-child::before{display:none}
+.flow .num{
+  font-family:var(--mono);font-size:.68rem;color:#fff;
+  width:21px;height:21px;border-radius:4px;flex:none;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+}
+.flow .step span.t{font-size:.92rem;color:var(--ink);line-height:1.4;padding-top:2px}
+
+/* ---------- toolbox ---------- */
+.toolbox{padding:68px 0}
+.toolbox h2{font-size:1.5rem;margin-bottom:8px}
+.toolbox .sub{color:var(--ink-soft);max-width:54ch;margin-bottom:30px}
+.tool-groups{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 40px}
+.tool-group h3{font-size:.95rem;font-family:var(--sans);font-weight:600;
+  margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.tool-chips{display:flex;flex-wrap:wrap;gap:8px}
+.tool-chips .chip{background:var(--paper)}
+.certs{margin-top:34px;padding-top:24px;border-top:1px solid var(--line);
+  color:var(--ink-soft);font-size:.92rem}
+
+/* ---------- contact / footer ---------- */
+.cta-band{padding:70px 0;border-top:1px solid var(--line);
+  background:var(--ink);color:var(--paper)}
+.cta-band h2{color:var(--paper);font-size:1.9rem;max-width:22ch}
+.cta-band p{color:#C9CFC3;margin-top:14px;max-width:48ch}
+.cta-band .btn{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.cta-band .btn:hover{background:#E0963A;border-color:#E0963A}
+.cta-band .row{display:flex;justify-content:space-between;align-items:flex-end;
+  gap:24px;flex-wrap:wrap}
+
+.site-footer{padding:26px 0;color:var(--ink-faint);font-size:.82rem}
+.site-footer .wrap{display:flex;justify-content:space-between;
+  gap:16px;flex-wrap:wrap}
+
+/* ---------- responsive ---------- */
+@media (max-width:760px){
+  .stat-row{grid-template-columns:1fr}
+  .tool-groups{grid-template-columns:1fr}
+  .run-row .body{flex-direction:column;gap:8px}
+  .run-row .code{width:auto}
+  .run-row .tags{max-width:none}
+  .run-row .go{display:none}
+  .cta-band .row{flex-direction:column;align-items:flex-start}
+}
+
+@media (prefers-reduced-motion: no-preference){
+  .hero h1,.hero .lede,.chip-row,.hero-cta{
+    animation:rise .6s ease both;
+  }
+  .hero .lede{animation-delay:.08s}
+  .chip-row{animation-delay:.16s}
+  .hero-cta{animation-delay:.22s}
+}
+@keyframes rise{
+  from{opacity:0;transform:translateY(10px)}
+  to{opacity:1;transform:translateY(0)}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg class="brand-mark" width="26" height="26" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="7" cy="9" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <circle cx="25" cy="9" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <circle cx="16" cy="25" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M9.5 10.5L14 22.5M22.5 10.5L18 22.5M10 9H22" stroke="currentColor" stroke-width="1.3" fill="none"/>
+      </svg>
+      <span class="brand-name">Pavel-Andrei Gemalescu<small>IT Operations &amp; Automation</small></span>
+    </a>
+    <nav class="top-nav">
+      <a href="#work">Case studies</a>
+      <a href="#toolbox">Toolbox</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="hero" id="top">
+    <div class="wrap">
+      <p class="byline"><span class="dot" aria-hidden="true"></span>Bucharest, Romania · in IT since 2014</p>
+      <h1>A decade of IT operations, now wired together with automation.</h1>
+      <p class="lede">I'm Pavel-Andrei Gemalescu, an <strong>IT Operations Engineer</strong> who builds and runs the systems that get people access, hardware, and answers — identity, endpoints, service delivery, and the automation holding it all together.</p>
+      <div class="chip-row">
+        <span class="chip">Identity &amp; Access</span>
+        <span class="chip">Endpoint Management</span>
+        <span class="chip">Automation &amp; AI</span>
+        <span class="chip">Service Delivery</span>
+      </div>
+      <div class="hero-cta">
+        <a class="btn" href="#work">Read the case studies ↓</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="n">10 yrs</div><div class="l">in IT operations &amp; support</div></div>
+        <div class="stat"><div class="n">5 regions</div><div class="l">Canada, US, EU, UK &amp; Brazil hardware and access ops</div></div>
+        <div class="stat"><div class="n">6</div><div class="l">end-to-end automation builds, documented below</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="now">
+    <div class="wrap">
+      <div class="now-box">
+        <h2>Right now</h2>
+        <dl>
+          <div>
+            <dt>Role</dt>
+            <dd>IT Operations Engineer at a global, remote-first technology company — leading hardware &amp; asset lifecycle, identity, and AI-assisted automation for a distributed workforce.</dd>
+          </div>
+          <div>
+            <dt>Day to day</dt>
+            <dd>Okta · Workday · Zendesk · Slack · Google Workspace · Claude Code</dd>
+          </div>
+          <div>
+            <dt>Certified</dt>
+            <dd>ITIL Foundation · CompTIA Security+</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="index" id="work">
+    <div class="wrap">
+      <h2>Case files</h2>
+      <p class="sub">Six processes I designed, automated, or rebuilt from scratch. Details are generalized — no employer names, internal tools, or links — but the architecture and the decisions are real.</p>
+
+      <div class="runlog">
+
+        <a class="run-row" href="#ops-01">
+          <div class="bar" style="background:var(--cat-auto)"></div>
+          <div class="body">
+            <span class="code">OPS-01</span>
+            <div class="main">
+              <h3>Identity Lifecycle Automation</h3>
+              <p>Thousands of manual onboarding and offboarding touches replaced by one event-driven pipeline from HR system to identity provider to every downstream app.</p>
+            </div>
+            <div class="tags"><span class="tag">Okta</span><span class="tag">Workday</span><span class="tag">Workflows</span></div>
+            <span class="go" aria-hidden="true">→</span>
+          </div>
+        </a>
+
+        <a class="run-row" href="#ops-02">
+          <div class="bar" style="background:var(--cat-system)"></div>
+          <div class="body">
+            <span class="code">OPS-02</span>
+            <div class="main">
+              <h3>Access Governance &amp; SSO Architecture</h3>
+              <p>Three documented integration patterns and one shared map of every support tool, so new app access never becomes a mystery again.</p>
+            </div>
+            <div class="tags"><span class="tag">SSO</span><span class="tag">SCIM</span><span class="tag">Documentation</span></div>
+            <span class="go" aria-hidden="true">→</span>
+          </div>
+        </a>
+
+        <a class="run-row" href="#ops-03">
+          <div class="bar" style="background:var(--cat-ai)"></div>
+          <div class="body">
+            <span class="code">OPS-03</span>
+            <div class="main">
+              <h3>AI-Assisted License Reclaim</h3>
+              <p>An AI agent proposes who to ask about an unused software seat; a person always makes the final call before anything is sent or removed.</p>
+            </div>
+            <div class="tags"><span class="tag">Claude</span><span class="tag">Slack</span><span class="tag">FinOps</span></div>
+            <span class="go" aria-hidden="true">→</span>
+          </div>
+        </a>
+
+        <a class="run-row" href="#ops-04">
+          <div class="bar" style="background:var(--cat-auto)"></div>
+          <div class="body">
+            <span class="code">OPS-04</span>
+            <div class="main">
+              <h3>Automated Vulnerability Remediation Digest</h3>
+              <p>A weekly vulnerability spreadsheet turned into a one-click Slack digest, with plain-English fixes drafted automatically.</p>
+            </div>
+            <div class="tags"><span class="tag">EDR</span><span class="tag">Apps Script</span><span class="tag">Zapier</span></div>
+            <span class="go" aria-hidden="true">→</span>
+          </div>
+        </a>
+
+        <a class="run-row" href="#ops-05">
+          <div class="bar" style="background:var(--cat-ai)"></div>
+          <div class="body">
+            <span class="code">OPS-05</span>
+            <div class="main">
+              <h3>Agentic Documentation &amp; Support Assistant</h3>
+              <p>A chat-based AI assistant that answers from real documentation — and hands off to a person with full context the moment it isn't sure.</p>
+            </div>
+            <div class="tags"><span class="tag">LLM</span><span class="tag">Slack</span><span class="tag">Zendesk</span></div>
+            <span class="go" aria-hidden="true">→</span>
+          </div>
+        </a>
+
+        <a class="run-row" href="#ops-06">
+          <div class="bar" style="background:var(--cat-ops)"></div>
+          <div class="body">
+            <span class="code">OPS-06</span>
+            <div class="main">
+              <h3>Global Hardware &amp; Asset Lifecycle Operations</h3>
+              <p>End-to-end hardware logistics for a distributed workforce, from day-one laptop delivery to clean, auditable returns.</p>
+            </div>
+            <div class="tags"><span class="tag">MDM</span><span class="tag">Procurement</span><span class="tag">Logistics</span></div>
+            <span class="go" aria-hidden="true">→</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OPS-01 ===================== -->
+  <section class="case" id="ops-01">
+    <div class="wrap">
+      <div class="case-head">
+        <span class="cat-dot" style="background:var(--cat-auto)"></span>
+        <div>
+          <p class="case-eyebrow">OPS-01 · Identity &amp; Access</p>
+          <h2>Identity Lifecycle Automation</h2>
+        </div>
+      </div>
+      <p class="case-meta">HR-to-identity-provider pipeline · Okta Workflows, Workday, Slack, email</p>
+
+      <div class="case-grid">
+        <div class="block">
+          <h3>The problem</h3>
+          <p>At a distributed technology company hiring across multiple countries, every new hire and every departure meant a slow, manual relay race between HR, IT, and whoever remembered which app needed a license revoked. Access landed late for new starters and lingered too long for people who had already left — visible friction coming in, and a quiet security risk going out.</p>
+        </div>
+
+        <div class="block">
+          <h3>How it works</h3>
+          <div class="flow">
+            <div class="step"><span class="num" style="background:var(--cat-auto)">1</span><span class="t">HR system marks a hire or termination</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-auto)">2</span><span class="t">Identity provider imports the change hourly</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-auto)">3</span><span class="t">Workflow sets manager, username &amp; email</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-auto)">4</span><span class="t">Account staged, then activated near start date</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-auto)">5</span><span class="t">Apps provisioned or deprovisioned automatically</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-auto)">6</span><span class="t">Stakeholders notified in chat &amp; email</span></div>
+          </div>
+          <p>The HR system doing the hiring is the single source of truth. An identity-provider job polls it hourly and imports anyone starting within the next week, <em>staging</em> — not activating — their account, so nothing goes live before it should. A short chain of workflows fills in what HR data leaves blank: deriving a username and work email from the person's preferred name with built-in collision handling, resolving a manager's email from an organizational ID, and queuing a scheduled job that flips the account to active and sends welcome messages within 24 hours of the real start date.</p>
+          <p>Downstream, every app with standards-based provisioning picks up the new account automatically; the handful that don't route to a documented manual checklist with the manager tagged in, so day-one access doesn't depend on someone's memory. Offboarding mirrors the same pipeline in reverse: a termination date deactivates the account at midnight — immediately for a short list of high-risk termination reasons — cascades through the same automated connections, transfers the departing person's files and calendar to their manager, and, after a 30-day recoverability window, deletes the account for good.</p>
+        </div>
+
+        <div class="block">
+          <h3>Decisions that mattered</h3>
+          <p>Staging rather than activating accounts early stopped a recurring problem: new hires getting access — and Slack pings — days before their actual start date. On the way out, the 30-day delay before permanent deletion was a deliberate trade-off: long enough to recover from a mistaken termination or a legal hold, short enough that stale accounts don't quietly pile up. Anything without a standards-based deprovisioning hook got written down as a manual step with an owner, instead of being quietly assumed to be "handled."</p>
+        </div>
+
+        <div class="block">
+          <h3>Outcome</h3>
+          <p>Standard hires now reach day one with working access and no manual ticket in the queue. Standard departures lose access the same day, automatically, instead of whenever someone got around to it. The exceptions — contractors, non-standard apps, unusual termination reasons — are now a short, explicit list instead of the whole process.</p>
+        </div>
+
+        <div class="block boundaries">
+          <h3>What it intentionally doesn't do</h3>
+          <p><strong>It doesn't replace judgment on contractor access tiers,</strong> and it doesn't pretend an app is deprovisioned if it isn't — unsupported apps are tracked on a checklist, never hidden.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OPS-02 ===================== -->
+  <section class="case" id="ops-02">
+    <div class="wrap">
+      <div class="case-head">
+        <span class="cat-dot" style="background:var(--cat-system)"></span>
+        <div>
+          <p class="case-eyebrow">OPS-02 · Identity &amp; Access</p>
+          <h2>Access Governance &amp; SSO Architecture</h2>
+        </div>
+      </div>
+      <p class="case-meta">Standards &amp; documentation · SAML, SCIM, JIT provisioning</p>
+
+      <div class="case-grid">
+        <div class="block">
+          <h3>The problem</h3>
+          <p>Every new SaaS app arrived with its own opinion about how single sign-on should work, and nobody had written down which pattern applied where. The result was inconsistent setups, a few apps that silently kept working after someone's access was supposedly removed, and a support desk that had to rediscover "who owns this tool" every time something broke.</p>
+        </div>
+
+        <div class="block">
+          <h3>How it works</h3>
+          <div class="flow">
+            <div class="step"><span class="num" style="background:var(--cat-system)">1</span><span class="t">Classify the app by provisioning support</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-system)">2</span><span class="t">Match it to one of three known patterns</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-system)">3</span><span class="t">Build groups &amp; assign members</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-system)">4</span><span class="t">Document any gap in automatic deprovisioning</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-system)">5</span><span class="t">Add it to the shared tool-ownership map</span></div>
+          </div>
+          <p>Rather than solving single sign-on one integration at a time, the work was to name and diagram the three patterns that actually exist in practice: apps with full account-lifecycle support, where sign-on, account creation, and deactivation all happen automatically; apps with sign-on only and just-in-time account creation, where the first login creates the account but nothing removes it later; and sign-on-only apps with no automatic account creation or removal at all.</p>
+          <p>Each pattern got its own swimlane runbook — identity-provider steps, authentication steps, and what happens inside the connected app — so a teammate configuring a new integration could match it to a pattern instead of guessing. Alongside that, every support and administration tool the team relied on (service requests, remote support, device management, asset tracking) got mapped into one diagram showing how a request actually flows from a person asking for help to a resolved ticket, across chat, email, and a self-service portal.</p>
+        </div>
+
+        <div class="block">
+          <h3>Decisions that mattered</h3>
+          <p>The uncomfortable finding — that some apps keep a live, working login even after the identity provider marks someone as offboarded — didn't get swept under the rug. Those apps were named explicitly and added to a manual deprovisioning checklist, because a documented manual step beats an undocumented false sense of automation.</p>
+        </div>
+
+        <div class="block">
+          <h3>Outcome</h3>
+          <p>New app integrations now start from one of three known patterns instead of a blank page, cutting the guesswork — and the back-and-forth — out of onboarding a new SaaS tool. The support-tool map became the reference the team actually opens when a request lands in the wrong queue.</p>
+        </div>
+
+        <div class="block boundaries">
+          <h3>What it intentionally doesn't do</h3>
+          <p><strong>It doesn't fix a vendor's limitations</strong> — some apps genuinely can't be auto-deprovisioned — but it makes those limitations visible and owned instead of invisible and assumed away.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OPS-03 ===================== -->
+  <section class="case" id="ops-03">
+    <div class="wrap">
+      <div class="case-head">
+        <span class="cat-dot" style="background:var(--cat-ai)"></span>
+        <div>
+          <p class="case-eyebrow">OPS-03 · Automation &amp; AI</p>
+          <h2>AI-Assisted License Reclaim</h2>
+        </div>
+      </div>
+      <p class="case-meta">Human-approved outreach · Claude, Slack, event-sourced tracking</p>
+
+      <div class="case-grid">
+        <div class="block">
+          <h3>The problem</h3>
+          <p>Software spend quietly leaks through seats nobody uses anymore, but a proper, ongoing review of every license was too heavy a process to run often — so it mostly didn't happen. The only time anyone looked closely was during a slow, manual, once-in-a-while audit.</p>
+        </div>
+
+        <div class="block">
+          <h3>How it works</h3>
+          <div class="flow">
+            <div class="step"><span class="num" style="background:var(--cat-ai)">1</span><span class="t">Export seats from the vendor console</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-ai)">2</span><span class="t">AI proposes likely-inactive candidates</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-ai)">3</span><span class="t">A person reviews &amp; edits the list</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-ai)">4</span><span class="t">Approved batch goes out, attributed by name</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-ai)">5</span><span class="t">Holder replies Keep / Release / something else</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-ai)">6</span><span class="t">IT reclaims the seat manually</span></div>
+          </div>
+          <p>The tool turns a vendor's raw seat export into a reviewable shortlist: an AI step flags people who look inactive or who self-reported they don't need the tool anymore, but nothing is sent until a person looks at that list and can remove anyone who shouldn't be on it. Once approved, the batch goes out over chat through a personal, attributable channel, so every outreach is traceable to the specific person who sent it — never a shared, anonymous bot identity.</p>
+          <p>Recipients get a short set of response options, and a live dashboard tracks every batch from "in progress" to "complete," with an audit view for anything that didn't get a clean answer. An earlier, spreadsheet-based version of this tool got rebuilt entirely after it broke under real concurrent use — a shared spreadsheet's write-lock couldn't safely handle simultaneous responses, and non-standard characters broke its signature checking. The rebuilt version tracks every decision as its own event rather than a cell to overwrite, so answers arriving at the same moment can't corrupt each other.</p>
+        </div>
+
+        <div class="block">
+          <h3>Decisions that mattered</h3>
+          <p>The bot was deliberately built to never take the final action itself — it doesn't touch a vendor console, remove a license, or change a group membership on its own. It proposes and asks; a person always pulls the trigger on removing a seat. Silence is never treated as a "yes" to releasing a license, and an out-of-office signal pauses the clock instead of escalating.</p>
+        </div>
+
+        <div class="block">
+          <h3>Outcome</h3>
+          <p>What used to be an occasional, time-consuming audit became a routine that takes minutes to kick off and runs itself from there, with a visible trail of who was asked, what they said, and who followed up. It has since been run successfully by a second person, independently.</p>
+        </div>
+
+        <div class="block boundaries">
+          <h3>What it intentionally doesn't do</h3>
+          <p><strong>No automatic removals, no silent-consent assumptions, no manager escalation on non-response</strong> — every edge case routes back to a person, by design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OPS-04 ===================== -->
+  <section class="case" id="ops-04">
+    <div class="wrap">
+      <div class="case-head">
+        <span class="cat-dot" style="background:var(--cat-auto)"></span>
+        <div>
+          <p class="case-eyebrow">OPS-04 · Automation &amp; AI</p>
+          <h2>Automated Vulnerability Remediation Digest</h2>
+        </div>
+      </div>
+      <p class="case-meta">Security operations · Apps Script, Zapier, generative AI, Slack</p>
+
+      <div class="case-grid">
+        <div class="block">
+          <h3>The problem</h3>
+          <p>A weekly endpoint-security vulnerability report arrived as a dense spreadsheet attachment, and turning it into "here's exactly who I need to message and what they should do" took real time every single week — time that scaled with the size of the fleet, not with the actual risk.</p>
+        </div>
+
+        <div class="block">
+          <h3>How it works</h3>
+          <div class="flow">
+            <div class="step"><span class="num" style="background:var(--cat-auto)">1</span><span class="t">Report lands in a shared inbox</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-auto)">2</span><span class="t">Automation extracts &amp; loads it into a tracked sheet</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-auto)">3</span><span class="t">AI drafts a plain-English fix per issue</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-auto)">4</span><span class="t">Formatted digest posts to the team channel</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-auto)">5</span><span class="t">One click DMs the affected person</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-auto)">6</span><span class="t">Weekly trend logs itself automatically</span></div>
+          </div>
+          <p>An automation watches a dedicated inbox for the weekly report, unpacks the attachment, and loads the raw data into a spreadsheet that already knows how to map each affected device to the person using it. A generative-AI formula layer turns each vulnerability into a short, plain-English fix a non-technical person can follow, with a special case for one hardware vendor's own update tool.</p>
+          <p>A scheduled script then posts a clean, per-device summary into the team's channel, with a "notify this person" button on each one, and appends that week's total to a running trend log with a chart leadership can check at any time.</p>
+        </div>
+
+        <div class="block">
+          <h3>Decisions that mattered</h3>
+          <p>Notifying the affected person stayed a one-click, human-triggered action instead of a fully automatic send. Vulnerability data lags real patch state — a device can already be fixed and simply not have reported back yet — so a two-second glance before the message goes out avoids telling someone to fix something that's already fixed, which matters more for trust than the few seconds it costs.</p>
+        </div>
+
+        <div class="block">
+          <h3>Outcome</h3>
+          <p>A multi-hour weekly spreadsheet exercise became a few minutes of review plus one click per device that actually needs attention, with a standing trend chart nobody has to build by hand.</p>
+        </div>
+
+        <div class="block boundaries">
+          <h3>What it intentionally doesn't do</h3>
+          <p><strong>It doesn't send anything without a human click,</strong> doesn't yet track whether someone actually remediated afterward (the next planned step), and never writes back to the security tool — it only reads and re-presents.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OPS-05 ===================== -->
+  <section class="case" id="ops-05">
+    <div class="wrap">
+      <div class="case-head">
+        <span class="cat-dot" style="background:var(--cat-ai)"></span>
+        <div>
+          <p class="case-eyebrow">OPS-05 · Automation &amp; AI</p>
+          <h2>Agentic Documentation &amp; Support Assistant</h2>
+        </div>
+      </div>
+      <p class="case-meta">Support &amp; knowledge · LLM agent, Slack, ticketing handoff</p>
+
+      <div class="case-grid">
+        <div class="block">
+          <h3>The problem</h3>
+          <p>Good documentation existed, but it lived in several different places, and plenty of chat questions were things already written down somewhere — if only someone had time to go find it. Meanwhile documentation quietly drifted out of date, because updating it wasn't anyone's job in particular.</p>
+        </div>
+
+        <div class="block">
+          <h3>How it works</h3>
+          <div class="flow">
+            <div class="step"><span class="num" style="background:var(--cat-ai)">1</span><span class="t">Person asks a question in chat</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-ai)">2</span><span class="t">AI checks real knowledge sources</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-ai)">3</span><span class="t">Confident answer → posted in-thread, instantly</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-ai)">4</span><span class="t">Not confident → opens a ticket with full context</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-ai)">5</span><span class="t">Resolution confirmed, or escalated to a person</span></div>
+          </div>
+          <p>A person's question in chat is handed to an AI agent that checks it against the team's actual documentation and knowledge sources before answering anything. If it finds a grounded, confident answer, it replies right there in the thread — available any time, not just during working hours.</p>
+          <p>If it can't, it doesn't guess: it opens a properly-described ticket and hands the conversation to a person with full context attached, so nobody has to re-explain their problem from scratch after getting a non-answer from a bot. A quick satisfaction check at the end of each exchange closes the loop, or escalates to a guided, human-supported resolution path if the answer didn't actually land.</p>
+        </div>
+
+        <div class="block">
+          <h3>Decisions that mattered</h3>
+          <p>The one rule that shaped everything else: the agent is allowed to say "I don't know" and hand off, but it is not allowed to guess with confidence. That single constraint is what makes the answers it does give trustworthy enough that people keep using it instead of going straight to a person.</p>
+        </div>
+
+        <div class="block">
+          <h3>Outcome</h3>
+          <p>Routine, already-documented questions get resolved instantly and outside office hours, and the questions that genuinely need a person arrive with full context already attached instead of a blank "can someone help?" message.</p>
+        </div>
+
+        <div class="block boundaries">
+          <h3>What it intentionally doesn't do</h3>
+          <p><strong>It's a first line of response, not a replacement for a person</strong> — anything outside documented, confident territory still goes to a human, every time, by design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== OPS-06 ===================== -->
+  <section class="case" id="ops-06">
+    <div class="wrap">
+      <div class="case-head">
+        <span class="cat-dot" style="background:var(--cat-ops)"></span>
+        <div>
+          <p class="case-eyebrow">OPS-06 · Physical Operations</p>
+          <h2>Global Hardware &amp; Asset Lifecycle Operations</h2>
+        </div>
+      </div>
+      <p class="case-meta">Multi-region logistics · procurement, MDM, warehousing, returns</p>
+
+      <div class="case-grid">
+        <div class="block">
+          <h3>The problem</h3>
+          <p>Getting a laptop into a new hire's hands — and getting it back cleanly when they left — across five-plus countries meant juggling several regional vendors, warehouses, and procurement paths, with no single place that showed the real state of an order. Inventory ran low without warning, and the process leaned on a handful of people remembering how things worked, region by region.</p>
+        </div>
+
+        <div class="block">
+          <h3>How it works</h3>
+          <div class="flow">
+            <div class="step"><span class="num" style="background:var(--cat-ops)">1</span><span class="t">New-hire data collected from HR sources</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-ops)">2</span><span class="t">Logged into one shared tracking board</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-ops)">3</span><span class="t">Hardware ordered via regional procurement</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-ops)">4</span><span class="t">Shipped to the nearest regional warehouse</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-ops)">5</span><span class="t">Delivered &amp; enrolled into device management</span></div>
+            <div class="step"><span class="num" style="background:var(--cat-ops)">6</span><span class="t">Offboarding reverses it: wipe → return → refurbish</span></div>
+          </div>
+          <p>New-hire details get pulled from whichever of several HR sources has them first — a weekly report, a request ticket, a spreadsheet — into one shared board that becomes the single place anyone can check order status, shipping, and what's still outstanding. Hardware requests flow through a standard procurement-and-approval path into region-specific fulfillment warehouses, each with its own carrier and paperwork quirks — customs declarations for some regions, different return-label and pickup processes for others — documented as a runbook per region rather than tribal knowledge in one person's head.</p>
+          <p>On delivery, devices enroll into mobile device management with a consistent naming convention, keeping asset tracking, support, and audits all pointing at the same record for the same machine. Offboarding runs the pipeline in reverse: a remote wipe command goes out the moment a termination is confirmed, a return kit and label ship automatically, and the warehouse refurbishes and restocks what comes back.</p>
+        </div>
+
+        <div class="block">
+          <h3>Decisions that mattered</h3>
+          <p>Explicit low-inventory thresholds per region replaced the old approach of noticing a stockout only after someone's start date was at risk. Exceptions to the standard hardware list — a region where the standard spec isn't available, for instance — stayed possible, but only through a documented approval step with a named sign-off, so "special cases" didn't quietly become the new normal.</p>
+        </div>
+
+        <div class="block">
+          <h3>Outcome</h3>
+          <p>Day-one hardware readiness became predictable across every region instead of a recurring fire drill, emergency procurement requests dropped, and the whole process became something a new team member could pick up from documentation instead of shadowing someone for months.</p>
+        </div>
+
+        <div class="block boundaries">
+          <h3>What it intentionally doesn't do</h3>
+          <p><strong>It doesn't remove the need for regional vendor relationships or judgment on edge cases</strong> — it removes the need to reinvent the process, or rediscover who to call, every single time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="toolbox" id="toolbox">
+    <div class="wrap">
+      <h2>Toolbox</h2>
+      <p class="sub">The platforms and languages behind the work above, grouped by what they're actually for.</p>
+
+      <div class="tool-groups">
+        <div class="tool-group">
+          <h3>Identity &amp; access</h3>
+          <div class="tool-chips">
+            <span class="chip">Okta</span><span class="chip">Workday</span>
+            <span class="chip">Google Workspace / GAM</span><span class="chip">SSO &amp; SCIM</span>
+            <span class="chip">Active Directory</span>
+          </div>
+        </div>
+        <div class="tool-group">
+          <h3>Endpoints &amp; infrastructure</h3>
+          <div class="tool-chips">
+            <span class="chip">macOS / Windows / Linux</span><span class="chip">Jamf Pro</span>
+            <span class="chip">Kandji</span><span class="chip">Intune</span>
+            <span class="chip">VMware</span><span class="chip">Cisco</span>
+            <span class="chip">AWS</span><span class="chip">Google Cloud</span>
+          </div>
+        </div>
+        <div class="tool-group">
+          <h3>Security</h3>
+          <div class="tool-chips">
+            <span class="chip">CrowdStrike</span><span class="chip">SentinelOne</span>
+            <span class="chip">Carbon Black</span><span class="chip">OneTrust</span>
+          </div>
+        </div>
+        <div class="tool-group">
+          <h3>Automation &amp; AI</h3>
+          <div class="tool-chips">
+            <span class="chip">Python</span><span class="chip">PowerShell</span>
+            <span class="chip">Zapier</span><span class="chip">Apps Script</span>
+            <span class="chip">Claude Code</span><span class="chip">Slack API</span>
+          </div>
+        </div>
+        <div class="tool-group">
+          <h3>Service management</h3>
+          <div class="tool-chips">
+            <span class="chip">Zendesk</span><span class="chip">ITSM workflows</span>
+            <span class="chip">KPI dashboards</span>
+          </div>
+        </div>
+        <div class="tool-group">
+          <h3>Languages</h3>
+          <div class="tool-chips">
+            <span class="chip">Romanian — native</span><span class="chip">English — upper intermediate</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="certs">ITIL Foundation · CompTIA Security+ · M.Sc. Intelligent Transport Systems Engineering, Electronics &amp; Telecommunications · B.Eng. Electronics, Telecommunications &amp; Transport Telemetry — University Politehnica of Bucharest</p>
+    </div>
+  </section>
+
+  <section class="cta-band" id="contact">
+    <div class="wrap">
+      <div class="row">
+        <div>
+          <h2>Let's talk about your IT operations.</h2>
+          <p>Open to roles in IT operations, identity &amp; access, endpoint management, or automation engineering — remote or Bucharest-based.</p>
+        </div>
+        <a class="btn" href="mailto:pavel_gemalescu@yahoo.com">Get in touch →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Add your LinkedIn / GitHub links in the footer below, as additional <span> items. -->
+<footer class="site-footer">
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Pavel-Andrei Gemalescu · Bucharest, Romania</span>
+    <span>pavel_gemalescu@yahoo.com</span>
+  </div>
+</footer>
+
+</body>
+</html>
